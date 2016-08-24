@@ -1,0 +1,14 @@
+{
+    "name": "brad82/laravel-football-data",
+    "description": "Provides an interface to the football-data.org API for Laravel 5",
+    "type": "project",
+    "require": {
+        "guzzlehttp/guzzle": "6.x"
+    },
+    "authors": [
+        {
+            "name": "Bradley Morris",
+            "email": "brad@bradleymorris.co.uk"
+        }
+    ]
+}
