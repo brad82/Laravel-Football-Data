@@ -10,5 +10,13 @@
             "name": "Bradley Morris",
             "email": "brad@bradleymorris.co.uk"
         }
-    ]
+    ],
+    "autoload": {
+        "psr-4": {
+          "Brad82\\FootballData\\": "src/"
+        },
+        "files": [
+          "src/helpers.php"
+        ]
+      }
 }
