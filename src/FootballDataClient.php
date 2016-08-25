@@ -2,7 +2,10 @@
 
 namespace Brad82\FootballData;
 
+use App;
 use GuzzleHttp\Client;
+
+use Brad82\FootballData\Exceptions\FootballDataException;
 
 class FootballDataClient
 {
@@ -18,8 +21,16 @@ class FootballDataClient
         return $this->client;
     }
 
-    public static function __callStatic($method, $args) 
+    public function __call($method, $args) 
     {
-      
+
+        $name = studly_case(str_singular($method));
+        $repository = 'Brad82\\FootballData\\Repositories\\' . $name . 'Repository';
+
+        if(!class_exists($repository)) {
+            throw new FootballDataException('Could not build repository chain, there is no ' . $name . ' repository defined');
+        }
+
+        return new $repository($this->client);
     }
 }

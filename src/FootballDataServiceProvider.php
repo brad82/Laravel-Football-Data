@@ -12,7 +12,7 @@ class FootballDataServiceProvider extends ServiceProvider
      *
      * @var bool
      */
-    protected $defer = true;
+    protected $defer = false;
 
     /**
      * Register the service provider.
@@ -21,13 +21,23 @@ class FootballDataServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->blind('football', function() 
+        $this->app->bind('football', function() 
         {
             $config = [
-                'api_url' => 'http://api.football-data.org/v1'
+                'base_uri' => 'http://api.football-data.org/v1/'
             ];
 
             return new FootballDataClient($config);
-        })
+        });
+    }
+
+    /**
+     * Get the services provided by the provider.
+     *
+     * @return array
+     */
+    public function provides()
+    {
+        return ['football'];
     }
 }
