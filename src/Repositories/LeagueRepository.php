@@ -1,11 +1,11 @@
 <?php
 
-namespace Brad82\FootballData\Models
+namespace Brad82\FootballData\Repositories;
 
 class LeagueRepository extends FootballDataRepository
 {
     public function all()
     {
-        return $this->client->get()->all();
+        $this->_get('competitions');
     }
 }
