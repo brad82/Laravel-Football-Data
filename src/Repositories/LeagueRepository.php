@@ -6,6 +6,11 @@ class LeagueRepository extends FootballDataRepository
 {
     public function all()
     {
-        $this->_get('competitions');
+        return $this->_get('competitions');
+    }
+
+    public function find($id) 
+    {
+        return $this->_get('competitions/' . $id);
     }
 }

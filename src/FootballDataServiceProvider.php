@@ -24,7 +24,10 @@ class FootballDataServiceProvider extends ServiceProvider
         $this->app->bind('football', function() 
         {
             $config = [
-                'base_uri' => 'http://api.football-data.org/v1/'
+                'base_uri' => 'http://api.football-data.org/v1/',
+                'headers'  => [
+                    'X-Auth-Token' => '3437824471a84516837f965c1c3f665f'
+                ]
             ];
 
             return new FootballDataClient($config);
