@@ -2,13 +2,14 @@
 
 namespace Brad82\FootballData\Synchronisers;
 
+use Closure;
 use Carbon\Carbon;
 use FootballApi;
 
 abstract class FixtureSynchroniser extends SynchroniserAbstract
 {   
     abstract protected function getLeagueRemoteIds();
-    abstract protected function getLocalFixturesFromRemoteIds(array $ids);
+    abstract protected function getLocalFixturesFromRemoteIds(array $ids, Closure $callback);
     protected function getRemoteData()
     {   
         foreach($this->getLeagueRemoteIds() as $league_id) {
@@ -31,13 +32,14 @@ abstract class FixtureSynchroniser extends SynchroniserAbstract
             }
         }
 
-        $fixtures = $this->getLocalFixturesFromRemoteIds(array_keys($ids));
+        $this->getLocalFixturesFromRemoteIds(array_keys($ids), function($fixtures) 
+        {
+            foreach($fixtures as $fixture) {
+                $remote_index = $ids[$fixture->remote_id];
+                $remote_result = $results[$remote_index];
 
-        foreach($fixtures as $fixture) {
-            $remote_index = $ids[$fixture->remote_id];
-            $remote_result = $results[$remote_index];
-
-            $this->syncItem($remote_result, $fixture);
-        }
+                $this->syncExistingItem($remote_result, $fixture);
+            }
+        });
     }
 }

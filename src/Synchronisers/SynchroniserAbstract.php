@@ -15,7 +15,7 @@ abstract class SynchroniserAbstract
         return $this->getRemoteData();
     }
 
-    protected function syncItem($remote, $local)
+    protected function syncExistingItem($remote, $local)
     {
         $local->mapFootballDataRemote($remote);
         $local->last_synced_at = Carbon::now();
