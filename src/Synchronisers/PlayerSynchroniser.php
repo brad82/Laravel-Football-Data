@@ -26,7 +26,7 @@ abstract class PlayerSynchroniser extends SynchroniserAbstract
 
         die('Cant Continue: The football data API doesn\'t currently give us any way to link results from this query to local models');
 
-        $this->getLocalPlayersFromRemoteIds(array_keys($ids), function($players) 
+        $this->getLocalPlayersFromRemoteIds(array_keys($ids), function($players)  use ($ids, $results)
         {
             foreach($players as $fixture) {
                 $remote_index = $ids[$fixture->remote_id];

@@ -32,7 +32,7 @@ abstract class FixtureSynchroniser extends SynchroniserAbstract
             }
         }
 
-        $this->getLocalFixturesFromRemoteIds(array_keys($ids), function($fixtures) 
+        $this->getLocalFixturesFromRemoteIds(array_keys($ids), function($fixtures) use ($ids, $results)
         {
             foreach($fixtures as $fixture) {
                 $remote_index = $ids[$fixture->remote_id];
